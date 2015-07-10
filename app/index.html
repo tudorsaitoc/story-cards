@@ -1,0 +1,306 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Polymer Starter Kit" />
+  <title>The Little Story Game!</title>
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#303F9F">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Polymer Starter Kit">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
+
+  <!-- will be replaced with elements/elements.vulcanized.html -->
+  <link rel="import" href="elements/elements.html">
+  <!-- endreplace-->
+
+</head>
+
+<body unresolved class="fullbleed layout vertical">
+
+  <span id="browser-sync-binding"></span>
+
+  <template is="dom-bind" id="app">
+
+      <paper-header-panel main mode="waterfall-tall">
+
+        <!-- Main Toolbar -->
+        <paper-toolbar id="mainToolbar">
+
+          <span class="flex"></span>
+
+          <!-- Toolbar icons -->
+          <google-signin-button  on-google-button-clicked="signInClicked" signed-in="[[signedIn]]"></google-signin-button>
+
+          <!-- Application name -->
+          <div class="middle paper-font-display2 app-name">
+            
+            <a href="/">Story Bits</a>
+
+          </div>
+
+          <!-- Application sub title -->
+          <div class="bottom title">
+
+            by Dustin Gulley
+
+          </div>
+
+        </paper-toolbar>
+
+        <!-- Main Content -->
+        <div class="content">
+
+          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+
+            <!-- *** PAST STORY ROUTE *** -->
+            <section data-route="pastStory">
+
+              <paper-material class="info-block" elevation="1">
+
+                <span title="Previous Day's story">
+
+                  <paper-fab icon="arrow-back" class="arrow-button" on-click="previousStory" animated></paper-fab>
+
+                </span>
+
+                <span class="past-date">[[formattedDate]]</span>
+
+                <span title="Next Day's story">
+
+                  <paper-fab icon="arrow-forward" class="arrow-button-next" on-click="nextStory" hidden$="[[hideTomorrow]]" animated></paper-fab>
+
+                </span>
+
+              </paper-material>
+
+              <div class="begin">Once upon a time...</div>
+
+                <template is="dom-repeat" items="[[cardList.cards]]">
+
+                  <paper-material elevation="1" class="display-card">
+
+                    <span class="display-content">[[item.content]]</span>
+
+                  </paper-material>
+
+                </template>
+
+              <div class="fin">fin</div>
+
+            </section>
+
+            <!-- **** HOME ROUTE *** -->
+            <section data-route="home">
+
+              <paper-material elevation="1">
+
+                <!-- Welcome block -->
+                <div class="title">Welcome to Story Bits!<span class="beta"> *alpha</span></div>
+
+                <div class="story-content">
+                  
+                  <p>
+
+                    Let's play a story making game!
+
+                  </p>
+
+                  <div>
+
+                    Rules:
+
+                  </div>
+
+                  <div>
+
+                    <ol>
+
+                      <li>
+
+                        You can make one move per game day.
+
+                      </li>
+
+                      <li>
+
+                      When the timer reaches 0 the game day is over.
+
+                      </li>
+
+                      <li>
+
+                        A move consists of adding a new story card to continue the story.
+
+                      </li>
+
+                      <li>
+
+                        Each card can contain a maximum of 500 characters.
+
+                      </li>
+
+                      <li>
+
+                        When a new game day begins you can read the existing game day's stories.
+
+                      </li>
+
+                    </ol>
+
+                    <p>
+
+                      That's it!
+
+                    </p>
+                    
+                    <p>
+
+                      To get started, sign in with Google, then hit the plus button to add a new card.
+                    
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </paper-material>
+
+              <paper-material class="info-block" elevation="1">
+
+                <span title="Yesterday's story">
+
+                  <paper-fab icon="arrow-back" class="arrow-button" on-click="previousStory" animated></paper-fab>
+
+                </span>
+
+                <!-- Count down timer -->
+                <count-down end-time="[[endTime]]"></count-down>
+
+                <!-- Show if a card can be created today -->
+                <iron-icon class="create" icon="icons:create" hidden$=[[actionPerformed]]></iron-icon>
+
+                <!-- Show if a card cannot be created today -->
+                <iron-icon class="wait" icon="icons:query-builder" hidden$=[[!actionPerformed]]></iron-icon>
+
+              </paper-material>
+
+              <!-- Begin the story -->
+              <div class="begin">Once upon a time...</div>
+
+              <!-- Show the story cards -->
+              <template is="dom-repeat" items="[[cards]]">
+
+                <paper-material elevation="1" class="display-card">
+
+                  <span class="display-content">[[item.content]]</span>
+
+                  <hr />
+
+                  <div class="display-content">by <span>[[item.author]]</span></div>
+
+                </paper-material>
+
+              </template>
+
+              <!-- Click to add a new card -->
+              <dg-story-add-button class="add-button" on-add-clicked="addClicked" signed-in="[[signedIn]]"></dg-story-add-button>
+
+              <!-- This will display once the add button is clicked -->
+              <story-card story-content="[[cardContent]]" on-story-card-save-content="saveClicked" hidden$=[[!addCardClicked]]></story-card>
+
+              <!-- The story is over -->
+              <div class="fin">fin</div>
+
+            </section>
+
+          </iron-pages>
+
+        </div>
+      
+      </paper-header-panel>
+    
+    </paper-drawer-panel>
+
+    <platinum-sw-register auto-register
+                          clients-claim
+                          skip-waiting
+                          on-service-worker-installed="displayInstalledToast">
+
+      <platinum-sw-cache default-cache-strategy="networkFirst"
+                         precache-file="precache.json">
+
+      </platinum-sw-cache>
+
+    </platinum-sw-register>
+
+    <paper-toast id="moveToast" text="Signed Out: You've completed today's move!" aria-hidden="true"></paper-toast>
+
+  </template>
+
+  <!-- build:js bower_components/underscore/underscore-min.js -->
+  <script src="bower_components/underscore/underscore-min.js"></script>
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/delorean/dist/delorean.min.js -->
+  <script src="bower_components/delorean/dist/delorean.min.js"></script>
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/firebase/firebase.js -->
+  <script src="bower_components/firebase/firebase.js"></script>
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/page/page.js -->
+  <script src="bower_components/page/page.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js bower_components/requirejs/require.js -->
+  <script data-main="scripts/app" src="bower_components/requirejs/require.js"></script>
+  <!-- endbuild-->
+
+  <!-- build:js scripts/app.js -->
+  <script src="scripts/app.js"></script>
+  <!-- endbuild-->
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<script src="../../bower_components/page/page.js"></script>
+<script>
+  window.addEventListener('WebComponentsReady', function() {
+
+    // We use Page.js for routing. This is a Micro
+    // client-side router inspired by the Express router
+    // More info: https://visionmedia.github.io/page.js/
+    page('/', function () {
+
+      require([ 'flux/actions/storyCardAction', 'flux/stores/storyCardStore' ], 
+        function ( StoryCardAction, storyCardStore ) {
+          
+          var storyCardAction = new StoryCardAction();
+          app.cards = [];
+          app.tomorrow = undefined;
+          app.hideTomorrow = true;
+
+          /**
+           * We are coming here from a previous date, turn off that date's listener
+           * @param  {[type]} app.currentDate !             [description]
+           * @return {[type]}                 [description]
+           */
+          if ( app.currentDate !== undefined ) {
+
+            storyCardAction.cardsForDateOff( new Date ( app.currentDate ) );
+
+          };
+
+          //Reset the current date
+          app.currentDate = new Date();                
+
+          //set the timer
+          if ( app.endTime === undefined ) {
+
+            var tempTime = new Date();
+            tempTime.setUTCHours( 23, 59, 59, 999 );
+
+            app.endTime = tempTime;
+
+          }
+
+          //Current route
+          app.route = 'home';
+
+          //Start up the database listeners
+          storyCardAction.cardsForDate( app.currentDate );
+
+        });
+
+    });
+
+    page( '/pastStory/:endTime', function ( ctx ) {
+
+      require([ 'flux/actions/storyCardAction', 'flux/stores/storyCardStore' ], 
+        function ( StoryCardAction, storyCardStore ) {
+
+          var storyCardAction = new StoryCardAction();
+          storyCardStore.cards = [];
+          app.cards = [];
+
+          if ( app.currentDate !== undefined ) {
+
+            var tempDate = new Date ( app.currentDate );
+
+            var tomorrow = new Date().setUTCDate( tempDate.getUTCDate() + 1 );
+
+            var today = new Date();
+            today.setUTCHours( 0, 0, 0, 0 );
+
+            if ( tomorrow < today ) {
+
+              app.tomorrow = tomorrow;
+              app.hideTomorrow = false;
+
+            } else {
+
+              app.tomorrow = undefined;
+              app.hideTomorrow = true;
+
+            }
+
+            storyCardAction.cardsForDateOff( tempDate );
+
+          }
+
+          //This will get the current endTime and subtract a day
+          app.currentDate = new Date( Number( ctx.params.endTime ) );
+          app.currentDate.setUTCHours( 23, 59, 59, 999 );
+          app.formattedDate =  ( app.currentDate.getMonth() + 1 ) + "/" + app.currentDate.getDate() + "/" + app.currentDate.getFullYear();
+
+          storyCardAction.cardsForDate( app.currentDate );
+
+          app.route = 'pastStory';
+
+      });
+
+    });
+
+    // add #! before urls
+    page({
+      hashbang: true
+    });
+
+  });
+</script>
