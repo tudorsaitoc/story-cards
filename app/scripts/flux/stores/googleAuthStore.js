@@ -1,4 +1,4 @@
-define( [ 'flux/constants/fluxConstants' ], function ( fluxConstants ) {
+define( [], function () {
 
 	//Create the store
 	return DeLorean.Flux.createStore({
@@ -11,12 +11,12 @@ define( [ 'flux/constants/fluxConstants' ], function ( fluxConstants ) {
 		},
 		signInMethod: function () {
 
-			this.emit( 'change', fluxConstants.SIGN_IN );
+			this.emit( 'change', MODULES.constants.SIGN_IN );
 
 		},
 		signOutMethod: function () {
 
-			this.emit( 'change', fluxConstants.SIGN_OUT );
+			this.emit( 'change', MODULES.constants.SIGN_OUT );
 
 		}
 

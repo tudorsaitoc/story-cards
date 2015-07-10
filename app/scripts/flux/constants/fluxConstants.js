@@ -1,4 +1,5 @@
-define( [], function () {
+var MODULES = {};
+MODULES.constants = ( function () {
 
 	return {
 
@@ -10,4 +11,4 @@ define( [], function () {
 
 	};
 
-});	
+})();

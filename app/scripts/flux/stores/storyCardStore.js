@@ -1,4 +1,4 @@
-define( [ 'flux/constants/fluxConstants' ], function ( fluxConstants ) {
+define( [], function () {
 
 	//*** Private ***
 	
@@ -69,17 +69,17 @@ define( [ 'flux/constants/fluxConstants' ], function ( fluxConstants ) {
 			sortCards();
 
 			//Let em know
-			this.emit( 'change', fluxConstants.CARD_LIST );
+			this.emit( 'change', MODULES.constants.CARD_LIST );
 
 		},
 		cardSavedMethod: function () {
 
-			this.emit( 'change', fluxConstants.CARD_SAVED );
+			this.emit( 'change', MODULES.constants.CARD_SAVED );
 
 		},
 		movedMethod: function () {
 
-			this.emit( 'change', fluxConstants.MOVED );
+			this.emit( 'change', MODULES.constants.MOVED );
 
 		}
 

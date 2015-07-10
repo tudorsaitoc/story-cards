@@ -16,9 +16,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.addCardClicked = false;               //Shows/Hides the card used for creating new cards
   app.signedIn = false;                     //By default the user is signed out
 
-  require([ 'flux/actions/googleAuthAction', 'flux/stores/googleAuthStore', 'flux/constants/fluxConstants', 'flux/actions/storyCardAction', 
+  require([ 'flux/actions/googleAuthAction', 'flux/stores/googleAuthStore', 'flux/actions/storyCardAction', 
     'flux/stores/storyCardStore', 'flux/firebase/firebaseRef'], 
-    function ( GoogleAuthAction, googleAuthStore, fluxConstants, StoryCardAction, storyCardStore, firebaseRef ) {
+    function ( GoogleAuthAction, googleAuthStore, StoryCardAction, storyCardStore, firebaseRef ) {
 
     var googleAuthAction = new GoogleAuthAction();  //Action for communicating signing in/out
     var storyCardAction = new StoryCardAction();    //Action for communicating changes to cards
@@ -141,7 +141,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       switch ( data ) {
 
-        case fluxConstants.SIGN_IN:
+        case MODULES.constants.SIGN_IN:
 
           app.signedIn = true;
 
@@ -160,7 +160,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           break;
 
-        case fluxConstants.SIGN_OUT:
+        case MODULES.constants.SIGN_OUT:
           
           app.signedIn = false;
           break;  
@@ -178,17 +178,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       switch ( data ) {
 
-        case fluxConstants.CARD_LIST:
+        case MODULES.constants.CARD_LIST:
           
           app.cards = storyCardStore.cards;
           break; 
 
-        case fluxConstants.CARD_SAVED:
+        case MODULES.constants.CARD_SAVED:
 
           afterMoveRoutine(); //A card has been saved, signout and restore defaults
           break;  
 
-        case fluxConstants.MOVED:
+        case MODULES.constants.MOVED:
 
           afterMoveRoutine(); //A move has been detected, signout and restore defaults
           break;  
