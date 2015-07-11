@@ -66,10 +66,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var storyCardAction = new StoryCardAction();
           storyCardStore.cards = [];
           app.cards = [];
+          var tempDate = undefined;
 
           if ( app.currentDate !== undefined ) {
 
-            var tempDate = new Date ( app.currentDate );
+            tempDate = new Date ( app.currentDate );
 
             var tomorrow = new Date().setUTCDate( tempDate.getUTCDate() + 1 );
 

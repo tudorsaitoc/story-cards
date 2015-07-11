@@ -116,7 +116,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               <div class="begin">Once upon a time...</div>
 
-                <template is="dom-repeat" items="[[cardList.cards]]">
+                <template is="dom-repeat" items="[[cards]]">
 
                   <paper-material elevation="1" class="display-card">
 
@@ -243,8 +243,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               </template>
 
-              <!-- Click to add a new card -->
-              <dg-story-add-button class="add-button" on-add-clicked="addClicked" signed-in="[[signedIn]]"></dg-story-add-button>
+              <span class="story-add-button">
+                
+                <!-- Click to add a new card -->
+                <paper-fab icon="add" class="fab-button" on-click="addClicked" disabled$="[[!signedIn]]" animated></paper-fab>
+
+              </span>
 
               <!-- This will display once the add button is clicked -->
               <story-card story-content="[[cardContent]]" on-story-card-save-content="saveClicked" hidden$=[[!addCardClicked]]></story-card>
