@@ -1,7 +1,6 @@
 define( [ 'flux/firebase/firebaseRef', 'flux/dispatchers/storyCardDispatcher' ], function ( firebaseRef, storyCardDispatcher ) {
 
 	var firebaseCards = firebaseRef.child( 'cards' );
-	var firebaseActions = firebaseRef.child( 'actions' );
 
 	/**
 	 * Used to update cards selected by date
@@ -96,6 +95,8 @@ define( [ 'flux/firebase/firebaseRef', 'flux/dispatchers/storyCardDispatcher' ],
 
 			firebaseCards.orderByChild( 'timestamp' ).startAt( startDate ).endAt( endDate )
 			.off( 'child_added', cardsForDateCallback );
+
+			storyCardDispatcher.removeCards();
 
 		};
 

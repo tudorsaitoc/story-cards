@@ -56,7 +56,8 @@ define( [], function () {
 
 			'addCardToList': 'addCardToListMethod',
 			'cardSaved': 'cardSavedMethod',
-			'moved': 'movedMethod'
+			'moved': 'movedMethod',
+			'removeCards': 'removeCardsMethod'
 
 		},
 		cards: [],
@@ -80,6 +81,12 @@ define( [], function () {
 		movedMethod: function () {
 
 			this.emit( 'change', MODULES.constants.MOVED );
+
+		},
+		removeCardsMethod: function () {
+
+			this.cards = [];
+			this.emit( 'change', MODULES.constants.CARD_LIST );
 
 		}
 

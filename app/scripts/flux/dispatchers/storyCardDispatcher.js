@@ -41,6 +41,12 @@ define( [ 'flux/stores/storyCardStore', 'flux/stores/googleAuthStore' ], functio
 
 			this.dispatch( 'moved' );
 
+		},
+
+		removeCards: function () {
+
+			this.dispatch( 'removeCards' );
+
 		}
 
 	});
