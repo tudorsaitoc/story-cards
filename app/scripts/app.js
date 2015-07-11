@@ -85,10 +85,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      */
     app.nextStory = function () {
 
-      app.currentDate = app.currentDate.setUTCDate( app.currentDate.getUTCDate() + 1 );
+      if ( app.goToToday === true ) {
 
-      //app.route = 'pastStory';
-      page.redirect( '/pastStory/' + app.currentDate.toString() );
+        //Homeword bound
+        page.redirect( '/' );
+
+      } else {
+
+        //Go forward a day
+        app.currentDate = app.currentDate.setUTCDate( app.currentDate.getUTCDate() + 1 );
+
+        //app.route = 'pastStory';
+        page.redirect( '/pastStory/' + app.currentDate.toString() );
+
+      }
 
     };
         
