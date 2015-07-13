@@ -10,7 +10,7 @@ define( [ 'flux/firebase/firebaseRef', 'flux/dispatchers/storyCardDispatcher' ],
 	function cardsForDateCallback ( snapshot, prev ) {
 
 		var card = snapshot.val();
-		card.cid = snapshot.key();
+		//card.cid = snapshot.key();
 
 		storyCardDispatcher.addCardToList( card );
 
@@ -42,13 +42,14 @@ define( [ 'flux/firebase/firebaseRef', 'flux/dispatchers/storyCardDispatcher' ],
 		instance.saveCard = function ( content ) {
 
 			var auth = firebaseRef.getAuth();
+			var firebaseAuthedCard = firebaseCards.child( auth.uid );
 
 			firebaseCards.push({
 
-				content: content,
+				content: content.content,
 				timestamp: Firebase.ServerValue.TIMESTAMP,
-				author: auth.google.displayName,
-				uid: auth.uid
+				author: firebaseRef.getAuth().google.displayName,
+				key: content.key
 
 			}, function ( error ) {
 

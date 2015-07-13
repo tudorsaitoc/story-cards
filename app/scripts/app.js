@@ -17,8 +17,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.signedIn = false;                     //By default the user is signed out
 
   require([ 'flux/actions/googleAuthAction', 'flux/stores/googleAuthStore', 'flux/actions/storyCardAction', 
-    'flux/stores/storyCardStore', 'flux/firebase/firebaseRef'], 
-    function ( GoogleAuthAction, googleAuthStore, StoryCardAction, storyCardStore, firebaseRef ) {
+    'flux/stores/storyCardStore'], 
+    function ( GoogleAuthAction, googleAuthStore, StoryCardAction, storyCardStore ) {
 
     var googleAuthAction = new GoogleAuthAction();  //Action for communicating signing in/out
     var storyCardAction = new StoryCardAction();    //Action for communicating changes to cards
@@ -43,17 +43,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      */
     function alreadyMoved() {
 
-      var auth = firebaseRef.getAuth();
-
-      if ( auth !== null ) {
-
-        //Get logged in user id
-        var id = auth.uid;
+      if ( app.key !== undefined ) {
 
         //Check the cards to see if they have created one
         var cardRef = _.find( app.cards, function ( card ) {
 
-          return card.uid === id;
+          return card.key === app.key;
 
         });
 
@@ -138,7 +133,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      */
     app.saveClicked = function ( e ) {
 
-      storyCardAction.saveCard( e.detail.content );
+      storyCardAction.saveCard( { content: e.detail.content, key: app.key } );
 
     };
 
@@ -147,13 +142,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @param  {[type]} data )             
      * @return {[type]}      [description]
      */
-    googleAuthStore.onChange( function ( data ) {
+    googleAuthStore.onChange( function ( data, key ) {
 
       switch ( data ) {
 
         case MODULES.constants.SIGN_IN:
 
           app.signedIn = true;
+          app.key = key;
 
           //Check to see if the user has already moved today
           //Put it on the event queue to check, otherwise
@@ -173,7 +169,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         case MODULES.constants.SIGN_OUT:
           
           app.signedIn = false;
-          break;  
+          app.key = undefined;
+          break; 
 
       }
 

@@ -28,7 +28,7 @@ define( [], function () {
 		//See if there is an existing card with matching id
 		for ( var i = 0; i < cardStore.cards.length; ++i ) {
 
-			if ( card.uid === cardStore.cards[i].uid ) {
+			if ( card.key === cardStore.cards[i].key ) {
 
 				index = i;
 				break;

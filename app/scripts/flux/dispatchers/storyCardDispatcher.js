@@ -2,9 +2,9 @@ define( [ 'flux/stores/storyCardStore', 'flux/stores/googleAuthStore' ], functio
 
 	return DeLorean.Flux.createDispatcher({
 
-		signIn: function () {
+		signIn: function ( key ) {
 
-			this.dispatch( 'signIn' );
+			this.dispatch( 'signIn', key );
 
 		},
 

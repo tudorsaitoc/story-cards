@@ -6,12 +6,12 @@ define( [], function () {
 		actions: {
 
 			'signIn': 'signInMethod',
-			'signOut': 'signOutMethod'
+			'signOut': 'signOutMethod',
 
 		},
-		signInMethod: function () {
+		signInMethod: function ( key ) {
 
-			this.emit( 'change', MODULES.constants.SIGN_IN );
+			this.emit( 'change', MODULES.constants.SIGN_IN, key );
 
 		},
 		signOutMethod: function () {
