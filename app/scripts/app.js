@@ -16,6 +16,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.addCardClicked = false;               //Shows/Hides the card used for creating new cards
   app.signedIn = false;                     //By default the user is signed out
 
+  //Detect browser
+  var ie = ( function(){
+
+      var undef,
+          v = 3,
+          div = document.createElement('div'),
+          all = div.getElementsByTagName('i');
+
+      while (
+
+          div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
+          all[0]
+      
+      );
+
+      return v > 4 ? v : undef;
+
+  }());
+
+  if ( ie !== undefined && ie <=9 ) {
+
+    alert( 'I\'m sorry but your browser is not supported :-( ');
+
+  }
+
   require([ 'flux/actions/googleAuthAction', 'flux/stores/googleAuthStore', 'flux/actions/storyCardAction', 
     'flux/stores/storyCardStore'], 
     function ( GoogleAuthAction, googleAuthStore, StoryCardAction, storyCardStore ) {
@@ -204,6 +229,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     });
 
+
+  });
+
+  // See https://github.com/Polymer/polymer/issues/1381
+  window.addEventListener('WebComponentsReady', function() {
+
+    document.querySelector('body').removeAttribute('unresolved');
 
   });
 
