@@ -41,9 +41,6 @@ define( [ 'flux/firebase/firebaseRef', 'flux/dispatchers/storyCardDispatcher' ],
 		 */
 		instance.saveCard = function ( content ) {
 
-			var auth = firebaseRef.getAuth();
-			var firebaseAuthedCard = firebaseCards.child( auth.uid );
-
 			firebaseCards.push({
 
 				content: content.content,

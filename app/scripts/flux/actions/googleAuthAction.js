@@ -40,7 +40,7 @@ define( [ 'flux/firebase/firebaseRef', 'flux/dispatchers/storyCardDispatcher' ],
 
 				snapshot.forEach( function ( child ) {
 
-					storyCardDispatcher.signIn( child.val().key );;
+					storyCardDispatcher.signIn( child.key() );;
 
 				});
 
