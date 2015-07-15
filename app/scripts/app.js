@@ -54,7 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      */
     function afterMoveRoutine () {
 
-      document.querySelector('#moveToast').show();
+      document.querySelector( '#moveToast' ).show();
       app.actionPerformed = true;
       app.addCardClicked = false;
       app.cardContent = '';
@@ -158,7 +158,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      */
     app.saveClicked = function ( e ) {
 
-      storyCardAction.saveCard( { content: e.detail.content, key: app.key } );
+      //Make sure content is added
+      if ( e.detail.content.trim() !== '' ) {
+
+        storyCardAction.saveCard( { content: e.detail.content, key: app.key } );
+
+
+      } else {
+
+        document.querySelector( '#saveToast' ).show();
+
+      }
 
     };
 
