@@ -56,8 +56,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       document.querySelector( '#moveToast' ).show();
       app.actionPerformed = true;
-      app.addCardClicked = false;
-      app.cardContent = '';
       googleAuthAction.signOut();
 
     };
@@ -162,6 +160,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       if ( e.detail.content.trim() !== '' ) {
 
         storyCardAction.saveCard( { content: e.detail.content, key: app.key } );
+        app.addCardClicked = false;
+        app.cardContent = '';
 
 
       } else {
@@ -203,6 +203,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         case MODULES.constants.SIGN_OUT:
           
+          app.addCardClicked = false;
+          app.cardContent = '';
           app.signedIn = false;
           app.key = undefined;
           break; 
