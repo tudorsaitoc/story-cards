@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <title>The Little Story Game!</title>
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-  <link rel="shortcut icon" href="/book.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/blue_book.ico" type="image/x-icon" />
 
   <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="#303F9F"> 
@@ -118,19 +118,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               <div class="begin">Once upon a time...</div>
 
-                <template is="dom-repeat" items="[[cards]]">
+              <iron-list items="[[cards]]" as="item">
 
-                  <paper-material elevation="1" class="display-card">
+                <template>
 
-                    <span class="display-content">[[item.content]]</span>
+                  <div>
 
-                    <hr />
+                    <paper-material elevation="1" class="display-card">
 
-                    <div class="display-content">by <span>[[item.author]]</span></div>
+                      <span class="display-content">[[item.content]]</span>
 
-                  </paper-material>
+                      <hr />
+
+                      <div class="display-content">by <span>[[item.author]]</span></div>
+
+                    </paper-material>
+
+                  </div>
 
                 </template>
+
+              </iron-list>
 
               <div class="fin">fin</div>
 
@@ -235,19 +243,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <div class="begin">Once upon a time...</div>
 
               <!-- Show the story cards -->
-              <template is="dom-repeat" items="[[cards]]">
+              <iron-list items="[[cards]]" as="item">
 
-                <paper-material elevation="1" class="display-card">
+                <template>
 
-                  <span class="display-content">[[item.content]]</span>
+                  <div>
 
-                  <hr />
+                    <paper-material elevation="1" class="display-card">
 
-                  <div class="display-content">by <span>[[item.author]]</span></div>
+                      <span class="display-content">[[item.content]]</span>
 
-                </paper-material>
+                      <hr />
 
-              </template>
+                      <div class="display-content">by <span>[[item.author]]</span></div>
+
+                    </paper-material>
+
+                  </div>
+
+                </template>  
+
+              </iron-list>  
 
               <span class="story-add-button">
                 
