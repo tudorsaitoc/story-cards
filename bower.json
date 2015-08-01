@@ -15,8 +15,7 @@
     "dg-count-down-timer": "*",
     "underscore": "~1.8.3",
     "iron-list": "PolymerElements/iron-list#~1.0.0",
-    "teenyjs": "*",
-    "q": "1.0.1"
+    "teenyjs": "*"
   },
   "devDependencies": {
     "web-component-tester": "*",
