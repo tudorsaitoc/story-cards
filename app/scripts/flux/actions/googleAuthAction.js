@@ -1,5 +1,4 @@
-define( [ 'flux/firebase/firebaseRef', 'flux/dispatchers/storyCardDispatcher' ], 
-	function ( firebaseRef,  storyCardDispatcher ) {
+teenyjs.define( 'googleAuthAction', [ 'firebaseRef', 'storyCardDispatcher' ], function ( firebaseRef,  storyCardDispatcher ) {
 
 	//Listens for us to be signed in
 	firebaseRef.onAuth( function ( data ) {

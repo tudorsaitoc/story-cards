@@ -16,91 +16,89 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // More info: https://visionmedia.github.io/page.js/
     page('/', function () {
 
-      require([ 'flux/actions/storyCardAction', 'flux/stores/storyCardStore' ], 
-        function ( StoryCardAction, storyCardStore ) {
+      teenyjs.require([ 'storyCardAction', 'storyCardStore' ], function ( StoryCardAction, storyCardStore ) {
           
-          var storyCardAction = new StoryCardAction();
-          app.cards = [];
-          app.tomorrow = undefined;
-          app.hideTomorrow = true;
+        var storyCardAction = new StoryCardAction();
+        app.cards = [];
+        app.tomorrow = undefined;
+        app.hideTomorrow = true;
 
-          /**
-           * We are coming here from a previous date, turn off that date's listener
-           * @param  {[type]} app.currentDate !             [description]
-           * @return {[type]}                 [description]
-           */
-          if ( app.currentDate !== undefined ) {
+        /**
+         * We are coming here from a previous date, turn off that date's listener
+         * @param  {[type]} app.currentDate !             [description]
+         * @return {[type]}                 [description]
+         */
+        if ( app.currentDate !== undefined ) {
 
-            storyCardAction.cardsForDateOff( new Date ( app.currentDate ) );
+          storyCardAction.cardsForDateOff( new Date ( app.currentDate ) );
 
-          };
+        };
 
-          //Reset the current date
-          app.currentDate = new Date();                
+        //Reset the current date
+        app.currentDate = new Date();                
 
-          //set the timer
-          if ( app.endTime === undefined ) {
+        //set the timer
+        if ( app.endTime === undefined ) {
 
-            var tempTime = new Date();
-            tempTime.setUTCHours( 23, 59, 59, 999 );
+          var tempTime = new Date();
+          tempTime.setUTCHours( 23, 59, 59, 999 );
 
-            app.endTime = tempTime;
+          app.endTime = tempTime;
 
-          }
+        }
 
-          //Current route
-          app.route = 'home';
+        //Current route
+        app.route = 'home';
 
-          //Start up the database listeners
-          storyCardAction.cardsForDate( app.currentDate );
+        //Start up the database listeners
+        storyCardAction.cardsForDate( app.currentDate );
 
-        });
+      });
 
     });
 
     page( '/pastStory/:endTime', function ( ctx ) {
 
-      require([ 'flux/actions/storyCardAction', 'flux/stores/storyCardStore' ], 
-        function ( StoryCardAction, storyCardStore ) {
+      teenyjs.require([ 'storyCardAction', 'storyCardStore' ], function ( StoryCardAction, storyCardStore ) {
 
-          var storyCardAction = new StoryCardAction();
-          storyCardStore.cards = [];
-          var tempDate = undefined;
+        var storyCardAction = new StoryCardAction();
+        storyCardStore.cards = [];
+        var tempDate = undefined;
 
-          if ( app.currentDate !== undefined ) {
+        if ( app.currentDate !== undefined ) {
 
-            tempDate = new Date ( app.currentDate );
+          tempDate = new Date ( app.currentDate );
 
-            var tomorrow = new Date ( tempDate.getUTCFullYear(), tempDate.getUTCMonth(), tempDate.getUTCDate() );
-            tomorrow.setUTCDate( tomorrow.getUTCDate() + 1 );
+          var tomorrow = new Date ( tempDate.getUTCFullYear(), tempDate.getUTCMonth(), tempDate.getUTCDate() );
+          tomorrow.setUTCDate( tomorrow.getUTCDate() + 1 );
 
-            var today = new Date();
-            today.setUTCHours( 0, 0, 0, 0 );
+          var today = new Date();
+          today.setUTCHours( 0, 0, 0, 0 );
 
-            if ( tomorrow < today ) {
+          if ( tomorrow < today ) {
 
-              app.tomorrow = tomorrow;
-              app.goToToday = false;
+            app.tomorrow = tomorrow;
+            app.goToToday = false;
 
-            } else {
+          } else {
 
-              app.tomorrow = undefined;
-              app.goToToday = true;
-
-            }
-
-            storyCardAction.cardsForDateOff( tempDate );
+            app.tomorrow = undefined;
+            app.goToToday = true;
 
           }
 
-          //This will get the current endTime and subtract a day
-          app.currentDate = new Date( Number( ctx.params.endTime ) );
-          app.currentDate.setUTCHours( 23, 59, 59, 999 );
-          app.formattedDate =  ( app.currentDate.getUTCMonth() + 1 ) + "/" + app.currentDate.getUTCDate() + "/" + app.currentDate.getUTCFullYear();
+          storyCardAction.cardsForDateOff( tempDate );
 
-          storyCardAction.cardsForDate( app.currentDate );
+        }
 
-          app.route = 'pastStory';
+        //This will get the current endTime and subtract a day
+        app.currentDate = new Date( Number( ctx.params.endTime ) );
+        app.currentDate.setUTCHours( 23, 59, 59, 999 );
+        app.formattedDate =  ( app.currentDate.getUTCMonth() + 1 ) + "/" + app.currentDate.getUTCDate() + "/" + app.currentDate.getUTCFullYear();
+
+        storyCardAction.cardsForDate( app.currentDate );
+
+        app.route = 'pastStory';
 
       });
 

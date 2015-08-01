@@ -1,4 +1,4 @@
-define( [ 'flux/firebase/firebaseRef', 'flux/dispatchers/storyCardDispatcher' ], function ( firebaseRef, storyCardDispatcher ) {
+teenyjs.define( 'storyCardAction', [ 'firebaseRef', 'storyCardDispatcher' ], function ( firebaseRef, storyCardDispatcher ) {
 
 	var firebaseCards = firebaseRef.child( 'cards' );
 

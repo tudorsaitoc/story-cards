@@ -41,9 +41,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   }
 
-  require([ 'flux/actions/googleAuthAction', 'flux/stores/googleAuthStore', 'flux/actions/storyCardAction', 
-    'flux/stores/storyCardStore'], 
-    function ( GoogleAuthAction, googleAuthStore, StoryCardAction, storyCardStore ) {
+  teenyjs.require([ 'googleAuthAction', 'googleAuthStore', 'storyCardAction', 'storyCardStore', 'constants'], 
+    function ( GoogleAuthAction, googleAuthStore, StoryCardAction, storyCardStore, constants ) {
 
     var googleAuthAction = new GoogleAuthAction();  //Action for communicating signing in/out
     var storyCardAction = new StoryCardAction();    //Action for communicating changes to cards
@@ -181,7 +180,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       switch ( data ) {
 
-        case MODULES.constants.SIGN_IN:
+        case constants.SIGN_IN:
 
           app.signedIn = true;
           app.key = key;
@@ -201,7 +200,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           break;
 
-        case MODULES.constants.SIGN_OUT:
+        case constants.SIGN_OUT:
           
           app.addCardClicked = false;
           app.cardContent = '';
@@ -222,17 +221,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       switch ( data ) {
 
-        case MODULES.constants.CARD_LIST:
+        case constants.CARD_LIST:
           
           app.cards = storyCardStore.cards;
           break; 
 
-        case MODULES.constants.CARD_SAVED:
+        case constants.CARD_SAVED:
 
           afterMoveRoutine(); //A card has been saved, signout and restore defaults
           break;  
 
-        case MODULES.constants.MOVED:
+        case constants.MOVED:
 
           afterMoveRoutine(); //A move has been detected, signout and restore defaults
           break;  

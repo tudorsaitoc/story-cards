@@ -12,10 +12,11 @@
     "dg-google-signin-button": "*",
     "lodash": "~3.9.3",
     "firebase": "~2.2.7",
-    "requirejs": "~2.1.18",
     "dg-count-down-timer": "*",
     "underscore": "~1.8.3",
-    "iron-list": "PolymerElements/iron-list#~1.0.0"
+    "iron-list": "PolymerElements/iron-list#~1.0.0",
+    "teenyjs": "*",
+    "q": "1.0.1"
   },
   "devDependencies": {
     "web-component-tester": "*",

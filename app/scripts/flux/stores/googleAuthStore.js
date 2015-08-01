@@ -1,4 +1,4 @@
-define( [], function () {
+teenyjs.define( 'googleAuthStore', ['constants'], function ( constants ) {
 
 	//Create the store
 	return DeLorean.Flux.createStore({
@@ -11,12 +11,12 @@ define( [], function () {
 		},
 		signInMethod: function ( key ) {
 
-			this.emit( 'change', MODULES.constants.SIGN_IN, key );
+			this.emit( 'change', constants.SIGN_IN, key );
 
 		},
 		signOutMethod: function () {
 
-			this.emit( 'change', MODULES.constants.SIGN_OUT );
+			this.emit( 'change', constants.SIGN_OUT );
 
 		}
 

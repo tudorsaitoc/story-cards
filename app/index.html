@@ -49,7 +49,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- endbuild-->
 
   <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script async src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <!-- endbuild -->
 
   <!-- will be replaced with elements/elements.vulcanized.html -->
@@ -306,29 +306,57 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   </template>
 
+  <!-- build:js bower_components/delorean/dist/delorean.min.js -->
+  <script src="bower_components/delorean/dist/delorean.min.js"></script>
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/firebase/firebase.js -->
+  <script src="bower_components/firebase/firebase.js"></script>
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/q/q.js -->
+  <script src="bower_components/q/q.js"></script>
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/teenyjs/dist/teeny-min.js -->
+  <script src="bower_components/teenyjs/dist/teeny-min.js"></script>
+  <!-- endbuild-->
+
+  <!-- build:js scripts/flux/actions/googleAuthAction.js -->
+  <script async src="scripts/flux/actions/googleAuthAction.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js scripts/flux/actions/storyCardAction.js -->
+  <script async src="scripts/flux/actions/storyCardAction.js"></script>
+  <!-- endbuild -->
+
   <!-- build:js scripts/flux/constants/fluxConstants.js -->
   <script async src="scripts/flux/constants/fluxConstants.js"></script>
-  <!-- endbuild-->
+  <!-- endbuild -->
+
+  <!-- build:js scripts/flux/dispatchers/storyCardDispatcher.js -->
+  <script async src="scripts/flux/dispatchers/storyCardDispatcher.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js scripts/flux/firebase/firebaseRef.js -->
+  <script async src="scripts/flux/firebase/firebaseRef.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js scripts/flux/stores/googleAuthStore.js -->
+  <script async src="scripts/flux/stores/googleAuthStore.js"></script>
+  <!-- endbuild -->
+
+  <!-- build:js scripts/flux/stores/storyCardStore.js -->
+  <script async src="scripts/flux/stores/storyCardStore.js"></script>
+  <!-- endbuild -->
 
   <!-- build:js bower_components/underscore/underscore-min.js -->
   <script async src="bower_components/underscore/underscore-min.js"></script>
   <!-- endbuild-->
 
-  <!-- build:js bower_components/delorean/dist/delorean.min.js -->
-  <script async src="bower_components/delorean/dist/delorean.min.js"></script>
-  <!-- endbuild-->
-
-  <!-- build:js bower_components/firebase/firebase.js -->
-  <script async src="bower_components/firebase/firebase.js"></script>
-  <!-- endbuild-->
-
   <!-- build:js bower_components/page/page.js -->
-  <script async src="bower_components/page/page.js"></script>
+  <script src="bower_components/page/page.js"></script>
   <!-- endbuild -->
-
-  <!-- build:js bower_components/requirejs/require.js -->
-  <script data-main="scripts/app" src="bower_components/requirejs/require.js"></script>
-  <!-- endbuild-->
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>

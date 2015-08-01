@@ -1,4 +1,4 @@
-define( [], function () {
+teenyjs.define( 'storyCardStore', ['constants'], function ( constants ) {
 
 	//*** Private ***
 	
@@ -70,23 +70,23 @@ define( [], function () {
 			sortCards();
 
 			//Let em know
-			this.emit( 'change', MODULES.constants.CARD_LIST );
+			this.emit( 'change', constants.CARD_LIST );
 
 		},
 		cardSavedMethod: function () {
 
-			this.emit( 'change', MODULES.constants.CARD_SAVED );
+			this.emit( 'change', constants.CARD_SAVED );
 
 		},
 		movedMethod: function () {
 
-			this.emit( 'change', MODULES.constants.MOVED );
+			this.emit( 'change', constants.MOVED );
 
 		},
 		removeCardsMethod: function () {
 
 			this.cards = [];
-			this.emit( 'change', MODULES.constants.CARD_LIST );
+			this.emit( 'change', constants.CARD_LIST );
 
 		}
 

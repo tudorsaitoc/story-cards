@@ -1,4 +1,4 @@
-define( [ 'flux/stores/storyCardStore', 'flux/stores/googleAuthStore' ], function ( storyCardStore, googleAuthStore ) {
+teenyjs.define( 'storyCardDispatcher', [ 'storyCardStore', 'googleAuthStore' ], function ( storyCardStore, googleAuthStore ) {
 
 	return DeLorean.Flux.createDispatcher({
 
